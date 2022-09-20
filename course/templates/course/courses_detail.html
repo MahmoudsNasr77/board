@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{%load static %}
+<title> {% block title %} {{CoursesDetail.course_name}}
+    {% endblock %}</title>
+    <h1 class="display-3 text-white animated slideInDown">
+        {% block  pagename %}
+        {{course.course_name}}
+        {% endblock pagename  %}
+        </h1>
+{%block body%}
+<div class="container">
+    <div class="row ">
+        <div class="col-12 d-flex justify-content-center">
+            <img class="image-fluid  w-50" src="{{course.course_image.url}}">
+        </div>
+    </div>   
+</div>
+<hr>
+<div class="container p-12">
+    <h3 class="text-center">Content<h3>
+    <div class="row ">
+        <div class="col-12 ">
+           <p class ="text-muted h5" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                Lesson 1
+           </p>
+        </div>
+        <div class="col-12 ">
+            <div class="collapse" id="collapseExample">
+                <div class="card card-body ">
+                  <p class="h5">Some placeholder content for the collapse component.</p>
+                </div>
+              </div>
+        </div>
+        </div>
+        <a href="{%url 'courses:addComment' course.slug %}"></a><button>Add Comment</button>
+        
+    </div>   
+</div>
+<div >
+    {% if course.comment%}
+    <div class="col-12 ">
+        <div >
+            {%for comm in commentans%}
+            <div >
+              <p class="h5">{{comm.comment_owner}}</p>
+              <p class="h5">{{comm.data}}</p>
+              <p class="h5">{{comm.comment}}</p>
+            </div>
+            {% endfor %}
+          </div>
+    </div>
+    {%endif%}
+    
+
+{%endblock body%}
